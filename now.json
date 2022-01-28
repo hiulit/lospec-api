@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "lospec-api",
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api",
+      "dest": "/index.js",
+      "methods": ["GET"]
+    }
+  ]
+}

@@ -33,24 +33,33 @@ app.get('/api', (req, res) => {
 
   let itemsPerPage = 10
 
-  getAllPalettes(apiUrl).then(palettes => {
-    let results = palettes
+  getAllPalettes(apiUrl).then(response => {
+    let results = {
+      palettes: response.palettes,
+      totalCount: response.totalCount
+    }
 
     switch (colorNumberFilterType) {
       case 'any':
-        results = palettes
+        results.palettes = response.palettes
 
         break
       case 'max':
-        results = palettes.filter(item => item.colors.length <= colorNumber)
+        results.palettes = response.palettes.filter(
+          item => item.colors.length <= colorNumber
+        )
 
         break
       case 'min':
-        results = palettes.filter(item => item.colors.length >= colorNumber)
+        results.palettes = response.palettes.filter(
+          item => item.colors.length >= colorNumber
+        )
 
         break
       case 'exact':
-        results = palettes.filter(item => item.colors.length == colorNumber)
+        results.palettes = response.palettes.filter(
+          item => item.colors.length == colorNumber
+        )
         break
       default:
         break
@@ -58,11 +67,13 @@ app.get('/api', (req, res) => {
 
     switch (sortingType) {
       case 'alphabetical':
-        results = results.sort((a, b) => a.title.localeCompare(b.title))
+        results.palettes = results.palettes.sort((a, b) =>
+          a.title.localeCompare(b.title)
+        )
 
         break
       case 'downloads':
-        results = results.sort(function (a, b) {
+        results.palettes = results.palettes.sort(function (a, b) {
           let c = parseInt(a.downloads.replace(/,/g, ''))
           let d = parseInt(b.downloads.replace(/,/g, ''))
           return d - c
@@ -70,7 +81,7 @@ app.get('/api', (req, res) => {
 
         break
       case 'newest':
-        results = results.sort(
+        results.palettes = results.palettes.sort(
           (a, b) => new Date(b.sortNewest) - new Date(a.sortNewest)
         )
 
@@ -82,20 +93,23 @@ app.get('/api', (req, res) => {
     if (tags) {
       let tagsSplit = tags.split(',').map(item => item.trim().replace(' ', ''))
 
-      results = results.filter(item =>
+      results.palettes = results.palettes.filter(item =>
         tagsSplit.every(i => item.tags.includes(i))
       )
     }
 
-    let resultsLength = results.length
+    let resultsLength = results.palettes.length
 
     console.log(resultsLength)
 
     if (page) {
-      res.json(results.slice(page * itemsPerPage, (page + 1) * itemsPerPage))
-    } else {
-      res.json(results)
+      results.palettes = results.palettes.slice(
+        page * itemsPerPage,
+        (page + 1) * itemsPerPage
+      )
     }
+
+    res.json(results)
   })
 })
 

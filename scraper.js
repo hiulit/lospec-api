@@ -47,7 +47,10 @@ let getPaletteList = async function (page = 0) {
 
 ;(async () => {
   const paletteList = await getPaletteList()
-  console.log(paletteList)
-  console.log(paletteList.length)
-  writeJSON(paletteList, './paletteList')
+  let finalJSON = {
+    palettes: paletteList,
+    totalCount: paletteList.length
+  }
+  console.log(finalJSON)
+  writeJSON(finalJSON, './paletteList')
 })()

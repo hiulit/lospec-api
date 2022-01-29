@@ -37,6 +37,7 @@ let getPaletteList = async function (page = 0) {
   // let itemsPerPage = results.palettes.length
   let itemsPerPage = 10
   let maxPages = Math.ceil(totalCount / itemsPerPage) //- 1
+  // maxPages = 1
 
   if (page < maxPages) {
     return results.palettes.concat(await getPaletteList(page + 1))
@@ -47,10 +48,11 @@ let getPaletteList = async function (page = 0) {
 
 ;(async () => {
   const paletteList = await getPaletteList()
+  console.log(paletteList.length)
+
   let finalJSON = {
     palettes: paletteList,
     totalCount: paletteList.length
   }
-  console.log(finalJSON)
   writeJSON(finalJSON, './paletteList')
 })()

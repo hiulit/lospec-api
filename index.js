@@ -40,10 +40,6 @@ app.get('/api', (req, res) => {
     }
 
     switch (colorNumberFilterType) {
-      case 'any':
-        results.palettes = response.palettes
-
-        break
       case 'max':
         results.palettes = response.palettes.filter(
           item => item.colors.length <= colorNumber
@@ -60,8 +56,6 @@ app.get('/api', (req, res) => {
         results.palettes = response.palettes.filter(
           item => item.colors.length == colorNumber
         )
-        break
-      default:
         break
     }
 
@@ -86,8 +80,6 @@ app.get('/api', (req, res) => {
         )
 
         break
-      default:
-        break
     }
 
     if (tags) {
@@ -98,9 +90,9 @@ app.get('/api', (req, res) => {
       )
     }
 
-    let resultsLength = results.palettes.length
+    results.totalCount = results.palettes.length
 
-    console.log(resultsLength)
+    console.log(results.totalCount)
 
     if (page) {
       results.palettes = results.palettes.slice(

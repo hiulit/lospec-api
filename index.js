@@ -92,12 +92,10 @@ app.get('/api', (req, res) => {
 
     results.totalCount = results.palettes.length
 
-    console.log(results.totalCount)
-
     if (page) {
       results.palettes = results.palettes.slice(
         page * itemsPerPage,
-        (page + 1) * itemsPerPage
+        page * itemsPerPage + itemsPerPage
       )
     }
 

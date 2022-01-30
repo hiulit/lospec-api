@@ -131,19 +131,19 @@ if [[ -n "${CHANGES_ARRAY[@]}" ]]; then
         echo
         git push
         echo
-        echo "Checking out to 'master' ..."
+        echo "Checking out to 'main' ..."
         echo
-        git checkout master
+        git checkout main
         echo
-        echo "Pulling from 'master' ..."
+        echo "Pulling from 'main' ..."
         echo
         git pull
         echo
-        echo "Merging 'develop' into 'master' ..."
+        echo "Merging 'develop' into 'main' ..."
         echo
         git merge --no-edit develop
         echo
-        echo "Pushing to 'master' ..."
+        echo "Pushing to 'main' ..."
         echo
         git push
         echo

@@ -94,9 +94,7 @@ fi
 
 trap ctrl_c TERM INT
 
-node "update-games.js"
-node "graphs"
-node "twitter-bot"
+node "scraper.js"
 
 git update-index -q --refresh
 while IFS= read -r line; do

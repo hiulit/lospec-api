@@ -13,7 +13,7 @@ app.use(cors())
 const apiUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:' + port + '/paletteList.json'
-    : 'https://raw.githubusercontent.com/hiulit/Lospec-API/master/paletteList.json'
+    : 'https://raw.githubusercontent.com/hiulit/lospec-api/master/paletteList.json'
 
 let getAllPalettes = async function (url) {
   const response = await fetch(url)

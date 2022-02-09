@@ -33,11 +33,29 @@ let getPaletteList = async function (page = 0) {
 
   results = JSON.parse(results)
 
+  results.palettes.forEach((element, index) => {
+    if (element.publishedAt) {
+      results.palettes[index].publishedAt = Date.parse(
+        element.publishedAt.split('.')[0]
+      )
+    }
+    if (element.createdAt) {
+      results.palettes[index].createdAt = Date.parse(
+        element.createdAt.split('.')[0]
+      )
+    }
+    if (element.sortNewest) {
+      results.palettes[index].sortNewest = Date.parse(
+        element.sortNewest.split('.')[0]
+      )
+    }
+  })
+
   let totalCount = results.totalCount
   // let itemsPerPage = results.palettes.length
   let itemsPerPage = 10
   let maxPages = Math.ceil(totalCount / itemsPerPage) //- 1
-  // maxPages = 1
+  // maxPages = 0
 
   if (page < maxPages) {
     return results.palettes.concat(await getPaletteList(page + 1))

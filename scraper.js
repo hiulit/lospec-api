@@ -49,6 +49,11 @@ let getPaletteList = async function (page = 0) {
         element.sortNewest.split('.')[0]
       )
     }
+    if (element.updatedAt) {
+      results.palettes[index].updatedAt = Date.parse(
+        element.updatedAt.split('.')[0]
+      )
+    }
   })
 
   let totalCount = results.totalCount

@@ -74,6 +74,9 @@ if [[ "$CURRENT_BRANCH" != "develop" ]]; then
     echo "Checking out to 'develop' ..."
     echo
     git checkout develop
+    echo "Pulling from 'develop' ..."
+    echo
+    git pull
     echo
 fi
 

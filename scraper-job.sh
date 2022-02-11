@@ -74,9 +74,6 @@ if [[ "$CURRENT_BRANCH" != "develop" ]]; then
     echo "Checking out to 'develop' ..."
     echo
     git checkout develop
-    echo "Pulling from 'develop' ..."
-    echo
-    git pull
     echo
 fi
 
@@ -94,6 +91,10 @@ if [[ "$DIRTY_FILES" -eq 1 ]]; then
     git stash
     echo
 fi
+
+echo "Pulling from 'develop' ..."
+echo
+git pull
 
 trap ctrl_c TERM INT
 

@@ -2,6 +2,11 @@ const fetch = require('node-fetch')
 const fs = require('fs')
 const path = require('path')
 
+const http = require('http')
+const https = require('https')
+http.globalAgent.maxSockets = 1
+https.globalAgent.maxSockets = 1
+
 function writeJSON (data, filePath) {
   try {
     fs.writeFileSync(
